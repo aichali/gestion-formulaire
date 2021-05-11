@@ -1,0 +1,15 @@
+*.classpath
+*.project
+*.settings/
+*bin/
+*target/
+*.class
+*.orig
+*.eclipse-pmd
+.idea/
+*.iml
+*.aird
+*.ucls
+.factorypath
+.tern-project
+.dbeaver-data-sources.xml
