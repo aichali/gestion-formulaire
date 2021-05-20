@@ -62,7 +62,7 @@ public class DataSourceConfig {
 
     private Properties additionalProperties() {
 	Map<String, Object> hibernateProps = new LinkedHashMap<>();
-	hibernateProps.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQLDialect");
+	hibernateProps.put(AvailableSettings.DIALECT, "org.hibernate.dialect.H2Dialect");
 	hibernateProps.put("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
 	hibernateProps.put(AvailableSettings.SHOW_SQL, "true");
 	hibernateProps.put(AvailableSettings.FORMAT_SQL, "true");

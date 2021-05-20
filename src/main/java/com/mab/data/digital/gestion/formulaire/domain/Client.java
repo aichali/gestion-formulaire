@@ -1,6 +1,7 @@
 package com.mab.data.digital.gestion.formulaire.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -46,7 +47,7 @@ public class Client implements Serializable {
     private String tel;
 
     @OneToMany(mappedBy = "client")
-    private List<Devis> devis;
+    private List<Devis> devis = new ArrayList<Devis>();
 
     protected Client() {
     }
