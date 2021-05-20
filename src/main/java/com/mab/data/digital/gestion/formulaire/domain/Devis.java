@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +25,8 @@ public class Devis implements Serializable {
     private static final long serialVersionUID = -4216611433473601980L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "devis_generator")
+    @SequenceGenerator(name = "devis_generator", sequenceName = "seq_devis", allocationSize = 1)
     private Integer id;
 
     @Temporal(TemporalType.DATE)
@@ -36,11 +38,11 @@ public class Devis implements Serializable {
     @Column
     private String message;
 
-    @Column(name = "CLIENT_ID")
+    @Column(name = "id_client")
     private Integer clientId;
 
     @ManyToOne
-    @JoinColumn(name = "ID_CLIENT", insertable = false, updatable = false)
+    @JoinColumn(name = "id_client", insertable = false, updatable = false)
     private Client client;
 
     protected Devis() {
@@ -52,8 +54,56 @@ public class Devis implements Serializable {
 	this.message = message;
     }
 
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    public Date getDate() {
+	return date;
+    }
+
+    public void setDate(Date date) {
+	this.date = date;
+    }
+
+    public String getExpertises() {
+	return expertises;
+    }
+
+    public void setExpertises(String expertises) {
+	this.expertises = expertises;
+    }
+
+    public String getMessage() {
+	return message;
+    }
+
+    public void setMessage(String message) {
+	this.message = message;
+    }
+
+    public Integer getClientId() {
+	return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+	this.clientId = clientId;
+    }
+
+    public Client getClient() {
+	return client;
+    }
+
+    public void setClient(Client client) {
+	this.client = client;
+    }
+
     @Override
     public String toString() {
-	return String.format("Devis[id=%d, date='%s', experties='%s', message='%s']", id, date, expertises, message);
+	return String.format("Devis[id=%d, date='%s', experties='%s', message='%s',  clientId='%s']", id, date, expertises, message, clientId);
     }
 }

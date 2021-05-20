@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,9 @@ public class Client implements Serializable {
     private static final long serialVersionUID = -2790685799202043940L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_generator")
+    @SequenceGenerator(name = "client_generator", sequenceName = "seq_client", allocationSize = 1)
+    @Column(name = "id_client")
     private Integer idClient;
 
     @Column
@@ -36,13 +39,13 @@ public class Client implements Serializable {
     @Column
     private String cp;
 
-    @Column
+    @Column(name = "adresse_mail")
     private String adresseMail;
 
     @Column
     private String tel;
 
-    @OneToMany(mappedBy = "devis")
+    @OneToMany(mappedBy = "client")
     private List<Devis> devis;
 
     protected Client() {
@@ -53,7 +56,7 @@ public class Client implements Serializable {
 	this.prenom = prenom;
 	this.adresse = adresse;
 	this.cp = cp;
-	this.adresse = mail;
+	this.adresseMail = mail;
 	this.tel = tel;
     }
 
