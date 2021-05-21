@@ -35,6 +35,5 @@ CREATE TABLE IF NOT EXISTS devis (
 
 commit;
 
---ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-
+--insert into client(nom, prenom, adresse, cp, adresse_mail, tel) values ('nom', 'prenom', 'adresse', 'cp', 'mail', 'tel');
+--insert into client(nom, prenom, adresse, cp, adresse_mail, tel) values ('nom2', 'prenom2', 'adresse2', 'cp2', 'mail2', 'tel2');
