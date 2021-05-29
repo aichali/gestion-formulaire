@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS client (
   prenom varchar(50)  NOT NULL,
   adresse varchar(110)  NOT NULL,
   cp varchar(5)  NOT NULL,
-  adresse_mail varchar(110) NOT NULL,
+  mail varchar(110) NOT NULL,
   tel varchar(10) NOT NULL,
   PRIMARY KEY (id_client)
 ); 

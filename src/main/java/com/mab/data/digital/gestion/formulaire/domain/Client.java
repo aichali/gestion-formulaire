@@ -40,8 +40,8 @@ public class Client implements Serializable {
     @Column
     private String cp;
 
-    @Column(name = "adresse_mail")
-    private String adresseMail;
+    @Column
+    private String mail;
 
     @Column
     private String tel;
@@ -57,14 +57,14 @@ public class Client implements Serializable {
 	this.prenom = prenom;
 	this.adresse = adresse;
 	this.cp = cp;
-	this.adresseMail = mail;
+	this.mail = mail;
 	this.tel = tel;
     }
 
     @Override
     public String toString() {
-	return String.format("Client[idClient=%d, nom='%s', prenom='%s', adresse='%s', cp='%s', mail='%s', tel='%s']", idClient, nom, prenom, adresse, cp,
-		adresseMail, tel);
+	return String.format("Client[idClient=%d, nom='%s', prenom='%s', adresse='%s', cp='%s', mail='%s', tel='%s']", idClient, nom, prenom, adresse, cp, mail,
+		tel);
     }
 
     public Integer getIdClient() {
@@ -107,12 +107,12 @@ public class Client implements Serializable {
 	this.cp = cp;
     }
 
-    public String getAdresseMail() {
-	return adresseMail;
+    public String getMail() {
+	return mail;
     }
 
-    public void setAdresseMail(String adresseMail) {
-	this.adresseMail = adresseMail;
+    public void setMail(String mail) {
+	this.mail = mail;
     }
 
     public String getTel() {
