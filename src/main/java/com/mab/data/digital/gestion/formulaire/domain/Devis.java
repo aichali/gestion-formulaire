@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,8 +24,7 @@ public class Devis implements Serializable {
     private static final long serialVersionUID = -4216611433473601980L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "devis_generator")
-    @SequenceGenerator(name = "devis_generator", sequenceName = "seq_devis", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Temporal(TemporalType.DATE)

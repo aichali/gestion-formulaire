@@ -1,13 +1,8 @@
 package com.mab.data.digital.gestion.formulaire.config;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Properties;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -56,21 +51,7 @@ public class DataSourceConfig {
 	em.setPackagesToScan("com.mab.data.digital.gestion.formulaire.domain");
 	JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 	em.setJpaVendorAdapter(vendorAdapter);
-	em.setJpaProperties(additionalProperties());
 	return em;
-    }
-
-    private Properties additionalProperties() {
-	Map<String, Object> hibernateProps = new LinkedHashMap<>();
-	hibernateProps.put(AvailableSettings.DIALECT, "org.hibernate.dialect.H2Dialect");
-	hibernateProps.put("spring.jpa.hibernate.naming-strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
-	hibernateProps.put(AvailableSettings.SHOW_SQL, "true");
-	hibernateProps.put(AvailableSettings.FORMAT_SQL, "true");
-	hibernateProps.put(AvailableSettings.USE_SQL_COMMENTS, "true");
-	hibernateProps.put(AvailableSettings.GENERATE_STATISTICS, "false");
-	Properties prop = new Properties();
-	prop.putAll(hibernateProps);
-	return prop;
     }
 
     @Autowired
