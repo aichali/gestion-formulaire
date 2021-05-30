@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +21,7 @@ import com.mab.data.digital.gestion.formulaire.repository.DevisRepository;
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.mab.data.digital.gestion.formulaire" })
 @ComponentScan(basePackageClasses = { ClientController.class })
-@EnableAutoConfiguration(exclude = { ErrorMvcAutoConfiguration.class, SecurityAutoConfiguration.class })
+@EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class, ErrorMvcAutoConfiguration.class, SecurityAutoConfiguration.class })
 @Import({ DataSourceConfig.class })
 public class RunApplication implements CommandLineRunner {
 

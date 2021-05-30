@@ -24,7 +24,7 @@ public class Devis implements Serializable {
     private static final long serialVersionUID = -4216611433473601980L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Temporal(TemporalType.DATE)
