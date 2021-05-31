@@ -75,4 +75,31 @@ Dans la couche Web (les contrôleurs), un autre type d'objets doit utilisé. Ils
 Pour cette raison, ils sont appelés DTO (Data Transfer Objet)
 
 ############ TESTS DE L'API
-Pour tester les différents services implémentés dans les contrôleurs, il est possible d'utiliser l'outil POSTMAN pour exécuter les différentes requêtes HTTP 
+Pour tester les différents services implémentés dans les contrôleurs, il est possible d'utiliser l'outil POSTMAN pour exécuter les différentes requêtes HTTP
+
+##### MAPPING DES REQUETES HTTP AVEC LES CONTROLEURS
+
+Les services présents dans les classes contrôleurs sont appelés en HTTP :
+1. La méthode d'appel dépend de l'annotation de mapping :
+     - GetMapping --> GET
+     - PostMapping --> POST
+     - PatchMaping --> PATCH
+     - DeleteMaping --> DELETE
+
+2. Si la requête HTTP envoi des données dans le corps, il faut mettre leur type dans la signature du service annoté par @RequestBody. Cette règle s'applique sur les méthodes POST et PATCH
+
+3. Dans le cas de GET, les paramètres de la recherche peuvent :
+    - faire partie de l'url du service. Dans ce cas, ils doivent être récupérés par @PathVariable
+    - être passés en partes après l'url du services. Dans ce cas, elles doivent être récupérés par @Parameter
+
+
+4 les url d'appel d'un service sont constitués de différents éléments :
+   - l'IP de la machine de déploiement du service (localhost en local)
+  - le port d'écoute du service, configuré dans le fichier [application.properties]
+  - Le contexte  de déploiement du service, configuré dans le fichier [application.properties]
+  - la valeur associée à l'annotation @RequestMapping qui se trouve au début de la classe du contrôleur,
+   - la  valeur de l'attribut $path$, associé au mapping du service (@GetMapping,il
+@PostMaping, etc)
+
+5. Les réponses des requêtes HTTP doivent obligatoirement contenir un statut de traitement et un corps pour certaines méthodes. Pour constituer ces réponses, il faut utiliser ResponseEntity
+ 
