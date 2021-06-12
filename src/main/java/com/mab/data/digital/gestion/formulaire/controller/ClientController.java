@@ -1,7 +1,5 @@
 package com.mab.data.digital.gestion.formulaire.controller;
 
-import java.net.URI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +40,7 @@ public class ClientController {
     public ResponseEntity<Client> create(@RequestBody Client client) {
 	try {
 	    Client newClient = clientRepository.save(client);
-	    return ResponseEntity.created(URI.create("/clients/" + newClient.getIdClient())).build();
+	    return new ResponseEntity<Client>(newClient, HttpStatus.CREATED);
 	} catch (Exception e) {
 	    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
