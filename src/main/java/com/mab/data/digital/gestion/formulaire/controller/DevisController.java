@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -32,6 +34,7 @@ public class DevisController {
     }
 
     @PostMapping()
+    @Transactional
     public ResponseEntity<?> create(@RequestBody Devis devis) {
 	try {
 

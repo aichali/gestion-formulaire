@@ -1,5 +1,7 @@
 package com.mab.data.digital.gestion.formulaire.controller;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +38,9 @@ public class ClientController {
 	}
     }
 
-	//{"nom":"nom","prenom":"prenom","adresse":"adresse","cp":"cp","mail":"mail","tel":"tel"}
+    // {"nom":"nom","prenom":"prenom","adresse":"adresse","cp":"cp","mail":"mail","tel":"tel"}
     @PostMapping()
+    @Transactional
     public ResponseEntity<Client> create(@RequestBody Client client) {
 	try {
 	    Client newClient = clientRepository.save(client);
