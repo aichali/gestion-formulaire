@@ -36,6 +36,7 @@ public class ClientController {
 	}
     }
 
+	//{"nom":"nom","prenom":"prenom","adresse":"adresse","cp":"cp","mail":"mail","tel":"tel"}
     @PostMapping()
     public ResponseEntity<Client> create(@RequestBody Client client) {
 	try {

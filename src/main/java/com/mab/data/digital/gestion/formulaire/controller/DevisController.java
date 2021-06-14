@@ -1,6 +1,7 @@
 package com.mab.data.digital.gestion.formulaire.controller;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,21 +33,25 @@ public class DevisController {
 
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody Devis devis) {
-	if (StringUtils.isEmpty(devis.getClientId())) {
-	    return ResponseEntity.badRequest().body("Id client ne doit pas être null");
-	}
-	Optional<Client> client = clientRepository.findById(devis.getClientId());
-	if (client.isPresent()) {
-	    Client clientObject = client.get();
-	    devis.setClient(clientObject);
-	    devis.setClientId(clientObject.getIdClient());
-	    devisRepository.save(devis);
+	try {
 
-	    clientObject.getDevis().add(devis);
-
-	    return ResponseEntity.created(URI.create("/devis/" + devis.getId())).build();
-	} else {
-	    return ResponseEntity.notFound().build();
+	    if (StringUtils.isEmpty(devis.getClientId())) {
+		return ResponseEntity.badRequest().body("Id client ne doit pas être null");
+	    }
+	    Optional<Client> client = clientRepository.findById(devis.getClientId());
+	    if (client.isPresent()) {
+		Client clientObject = client.get();
+		devis.setClient(clientObject);
+		devis.setClientId(clientObject.getIdClient());
+		devis.setDate(new Date());
+		devisRepository.save(devis);
+		clientObject.getDevis().add(devis);
+		return ResponseEntity.created(URI.create("/devis/" + devis.getId())).build();
+	    } else {
+		return ResponseEntity.notFound().build();
+	    }
+	} catch (NumberFormatException e) {
+	    return ResponseEntity.badRequest().body("Number Format Exception : idClient");
 	}
     }
 }
