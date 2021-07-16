@@ -1,57 +1,29 @@
-pipeline {
+stages {
 
-  // "Top-level" agent is assigned to docker slaves via Jenkins pipeline configuration
-  agent none
+         stage('build Dockerfile') {
 
- 	stages {
-     stage('Docker node test') {
-      agent {
-        docker {
-          image 'node:7-alpine'
-          args '--name docker-node' // list any args
-        }
-      }
-      steps {
-        // Steps run in node:7-alpine docker container on docker slave
-        sh 'node --version'
-      }
-      }
+            steps {
+                sh '''echo "FROM maven:3-alpine
+                          RUN apk add --update docker openrc
+                          RUN rc-update add docker boot" >/var/lib/jenkins/workspace/Dockerfile'''
 
-   
-   stage('Docker maven test') {
-      agent {
-        docker {
-          image 'maven:3-alpine'
-        }
-      }
-      steps {
-        // Steps run in maven:3-alpine docker container on docker slave
-        sh 'mvn --version'
-      }
-    }
-
-   
-   
-   
-    		stage('Build') {
-      			steps {
-        				echo 'Build Step'
-      			}
-    		}
-stage('Tests') {
-      			steps {
-        				echo 'Tests Stage'
-      			}
-    		}
-stage('Analyses') {
-      			steps {
-        				echo 'Code Analysis Stage'
-     			}
-    		}
-stage('Deploy') {
-      			steps {
-        				echo 'Deploy Stage'
-      			}
-    		}
+            }
          }
-}
+
+         stage('run Dockerfile') {
+             agent{
+                 dockerfile {
+                            filename '/var/lib/jenkins/workspace/Dockerfile'
+                            args '--user root -v $HOME/.m2:/root/.m2  -v /var/run/docker.sock:/var/run/docker.sock'
+                        }
+             }
+
+             steps {
+                 sh 'docker version'
+                 sh 'mvn -version'
+                 sh 'java -version'
+             }
+
+         }
+
+    }
